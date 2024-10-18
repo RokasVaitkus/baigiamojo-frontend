@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import RecipeService from "../services/recipe.service";
+
 function NewRecipe({ addRecipe }) {
   // State for the recipe fields
   const [name, setName] = useState("");
@@ -33,7 +35,7 @@ function NewRecipe({ addRecipe }) {
       howToMakeIt,
       ingredients,
     };
-    addRecipe(newRecipe);
+    RecipeService.createRecipe(newRecipe);
     // Clear the form
     setName("");
     setDescription("");

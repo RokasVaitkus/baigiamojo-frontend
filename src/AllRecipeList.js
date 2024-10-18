@@ -1,5 +1,7 @@
 import React from "react";
+import RecipeService from "./services/recipe.service";
 
+const recipes= RecipeService.getAllRecipes();
 
 const RecipeCard = ({ name, time, portion }) => {
   return (

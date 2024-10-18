@@ -92,10 +92,10 @@ body {
 
 /* Recipe card styling */
 .recipe-card {
-  border: 3px solid #30b22a; /* Green border */
-  border-radius: 15px;
-  padding: 10px;
-  min-height: 250px; /* Adjust as needed */
+  border: 5px solid #30b22a; /* Green border */
+  border-radius: 20px;
+  padding: 0px;
+  min-height: 300px; /* Adjust as needed */
   display: flex;
   flex-direction: column;
   justify-content: flex-end; /* Align content at the bottom */
