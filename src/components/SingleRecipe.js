@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from "react";
 import UserService from "../services/user.service";
-import { useParams } from "react-router-dom";  // Import useParams to access URL parameters
+import { useParams } from "react-router-dom"; 
 
 
 const SingleRecipe = () => {
-  const { recipeId } = useParams();  // Get the recipeId from the URL
+  const { recipeId } = useParams(); 
   const [recipe, setRecipe] = useState(null);
   const [imageSrc, setImageSrc] = useState("");
 
   useEffect(() => {
-    // Fetch recipe details by ID
+
     UserService.getRecipeById(recipeId)
       .then((response) => {
         setRecipe(response.data);
 
-        // Fetch the image once the recipe is fetched
         if (response.data.linkToImage) {
           return UserService.getImageForRecipe(response.data.linkToImage);
         }

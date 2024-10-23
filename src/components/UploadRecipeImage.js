@@ -4,11 +4,11 @@ import AdminService from "../services/admin.service";
 
 
 function UploadRecipeImage() {
-  const { recipeId } = useParams(); // Get recipeId from route parameters
+  const { recipeId } = useParams();
   const [selectedFile, setSelectedFile] = useState(null);
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate(); // React Router hook to navigate to different pages
+  const navigate = useNavigate();
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -17,7 +17,7 @@ function UploadRecipeImage() {
       setSelectedFile(null);
     } else {
       setSelectedFile(file);
-      setMessage(""); // Clear any previous message
+      setMessage("");
     }
   };
 
@@ -29,33 +29,28 @@ function UploadRecipeImage() {
       return;
     }
 
-    setLoading(true); // Start loading state
+    setLoading(true);
 
     try {
-      // Upload the image and retrieve the image ID from the response
       const response = await AdminService.uploadImage(selectedFile);
 
-      // Extract the image ID from the response directly
       const imageId = response.data;
 
-      // Construct the image link using the image ID
       const imageLink = `http://localhost:8080/api/user/findimagebyid/${imageId}`;
 
-      // Update the recipe with this image link
       await AdminService.editRecipeImageLink(recipeId, JSON.stringify(imageLink));
 
       setMessage("Image uploaded and recipe updated successfully!");
-      setSelectedFile(null); // Clear the selected file after success
+      setSelectedFile(null);
 
-      // Redirect to the AdminBoard after successful upload
       setTimeout(() => {
-        navigate("/admin"); // Redirect to AdminBoard
-      }, 2000); // 2-second delay for user to see success message
+        navigate("/admin");
+      }, 2000);
     } catch (error) {
       console.error("Error uploading image or updating recipe:", error);
       setMessage("Failed to upload image or update recipe. Please try again.");
     } finally {
-      setLoading(false); // End loading state
+      setLoading(false); 
     }
   };
 

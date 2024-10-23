@@ -1,4 +1,4 @@
-// components/AdminBoard.js
+
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import RecipesList from "./recipeListScrollable";
@@ -9,11 +9,11 @@ const AdminBoard = () => {
   const navigate = useNavigate();
 
   const handleCreateRecipe = () => {
-    navigate("/new-recipe"); // Navigate to the NewRecipe component
+    navigate("/new-recipe");
   };
 
   const handleCreateUser = () => {
-    navigate("/create-user"); // Navigate to the CreateUser component
+    navigate("/create-user");
   };
 
   return (

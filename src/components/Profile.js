@@ -1,27 +1,26 @@
 import React, { useState } from "react";
 import LoginService from "../services/login.service";
-import UserService from "../services/user.service"; // Import UserService for the edit function
+import UserService from "../services/user.service";
 
 const Profile = () => {
   const currentUser = LoginService.getCurrentUser();
 
-  // Local state to store form input values and edit mode toggle
+
   const [editMode, setEditMode] = useState(false);
   const [formData, setFormData] = useState({
     username: currentUser.username,
     email: currentUser.email,
   });
-  const [error, setError] = useState(null); // To handle error feedback if needed
-  const [successMessage, setSuccessMessage] = useState(null); // For success feedback
+  const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
 
-  // Toggle edit mode
+
   const toggleEditMode = () => {
     setEditMode(!editMode);
-    setError(null); // Clear error when toggling modes
-    setSuccessMessage(null); // Clear success message when toggling modes
+    setError(null);
+    setSuccessMessage(null);
   };
 
-  // Handle form input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -30,23 +29,23 @@ const Profile = () => {
     });
   };
 
-  // Handle form submission (send the updated data to the backend)
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Prepare the user data to be sent (no password field anymore)
+
     const userDto = {
       username: formData.username,
       email: formData.email,
     };
 
-    // Call the editUserById API and handle the response
+
     UserService.editUserById(currentUser.id, userDto)
       .then((response) => {
         console.log("User updated successfully:", response.data);
         setSuccessMessage("User information updated successfully!");
-        setEditMode(false); // Exit edit mode after successful update
-        // Optionally update the currentUser information in the local storage if needed
+        setEditMode(false);
+
       })
       .catch((error) => {
         console.error("Error updating user:", error);

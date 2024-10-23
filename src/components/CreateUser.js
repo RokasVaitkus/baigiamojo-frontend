@@ -1,13 +1,13 @@
-// components/CreateUser.js
+
 import React, { useState } from 'react';
-import LoginService from '../services/login.service'; // Use LoginService for registration
+import LoginService from '../services/login.service';
 import { useNavigate } from 'react-router-dom';
 
 const CreateUser = () => {
     console.log("CreateUser component rendered");
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
-  const [roles, setRoles] = useState({ admin: false, user: false }); // State to manage roles
+  const [roles, setRoles] = useState({ admin: false, user: false });
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
@@ -22,11 +22,11 @@ const CreateUser = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const selectedRoles = Object.keys(roles).filter(role => roles[role]); // Get selected roles
+    const selectedRoles = Object.keys(roles).filter(role => roles[role]);
     try {
-      await LoginService.register({ username, email, role: selectedRoles, password }); // Use LoginService for registration
+      await LoginService.register({ username, email, role: selectedRoles, password });
       setMessage('User created successfully!');
-      navigate('/admin'); // Navigate back to Admin Board or to another page
+      navigate('/admin');
     } catch (error) {
       console.error('Error creating user:', error);
       setMessage('Failed to create user. Please try again.');

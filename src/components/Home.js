@@ -7,14 +7,14 @@ import RecipeSlideshow from "./RecipeSlideShow";
 
 const Home = () => {
   const [content, setContent] = useState("Welcome to the homepage!");
-  const [error, setError] = useState(null);    // State to handle any potential errors 
+  const [error, setError] = useState(null);
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
     UserService.getAllRecipes()
       .then(
         (response) => {
-          setRecipes(response.data);  // Assuming response.data contains the recipes array
+          setRecipes(response.data);
         },
         (error) => {
           console.error("Failed to fetch recipes", error);

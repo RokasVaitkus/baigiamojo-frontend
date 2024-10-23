@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer } from 'react';
-import UserService from '../services/user.service'; // Adjust the path if needed
+import UserService from '../services/user.service';
 
-// Initial state and reducer function
+
 const initialState = {
   recipes: [],
   currentIndex: 0,
@@ -32,7 +32,6 @@ const RecipeSlideshow = () => {
         console.log('Fetched recipes:', response.data);
         const allRecipes = response.data;
 
-        // Shuffle and select 8 random recipes
         const shuffledRecipes = allRecipes.sort(() => 0.5 - Math.random());
         const randomRecipes = shuffledRecipes.slice(0, 8);
         console.log('Random recipes selected:', randomRecipes);
@@ -43,16 +42,15 @@ const RecipeSlideshow = () => {
     };
 
     fetchRandomRecipes();
-  }, []); // Run only on mount
+  }, []);
 
-  // Automatic scrolling every 3 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       dispatch({ type: 'NEXT_SLIDE' });
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [state.recipes.length]); // Update the interval based on recipes length
+  }, [state.recipes.length]);
 
   if (state.recipes.length === 0) return <p>Loading recipes...</p>;
 
@@ -81,16 +79,16 @@ const RecipeSlideshow = () => {
           />
         ))}
       </div>
-      {/* Navigation arrows */}
+
       <button className="arrow left-arrow" onClick={() => dispatch({ type: 'PREV_SLIDE' })}>&lt;</button>
       <button className="arrow right-arrow" onClick={() => dispatch({ type: 'NEXT_SLIDE' })}>&gt;</button>
     </div>
   );
 };
 
-// RecipeCard component
+
 const RecipeCard = ({ name, time, portion, linkToImage, recipeId }) => {
-  const [imageSrc, setImageSrc] = React.useState(""); // Using React.useState here for the image source
+  const [imageSrc, setImageSrc] = React.useState("");
 
   useEffect(() => {
     if (linkToImage) {
@@ -100,7 +98,7 @@ const RecipeCard = ({ name, time, portion, linkToImage, recipeId }) => {
         })
         .catch((error) => console.error("Error fetching image:", error));
     } else {
-      setImageSrc("path/to/default/image.png"); // Set a default image if linkToImage is null
+      setImageSrc("path/to/default/image.png");
     }
   }, [linkToImage]);
 
@@ -110,7 +108,7 @@ const RecipeCard = ({ name, time, portion, linkToImage, recipeId }) => {
 
   return (
     <button className="recipe-card" onClick={handleCardClick}>
-      <img src={imageSrc} alt={name} className="recipe-image" /> {/* Using name for the alt attribute */}
+      <img src={imageSrc} alt={name} className="recipe-image" /> 
       <div className="content">
         <p><strong>Pavadinimas:</strong> {name}</p>
         <p><strong>Time to make:</strong> {time} minutes</p>

@@ -10,11 +10,9 @@ const Login = () => {
     e.preventDefault();
     LoginService.login(username, password).then(
       () => {
-        // Handle successful login
         window.location.reload();
       },
       (error) => {
-        // Handle error
         console.log("Login error: ", error);
       }
     );

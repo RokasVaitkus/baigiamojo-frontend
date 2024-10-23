@@ -9,14 +9,14 @@ const RecipeCard = ({ name, time, portion, linkToImage, onClick, recipeId}) => {
   const[imageSrc, setImageSrc] = useState("");
   const navigate = useNavigate();
   const handleCardClick = () => {
-    // Navigate to the single recipe page, passing the recipeId
+
     navigate(`/recipe/${recipeId}`);
   };
   useEffect(() => {
-    // Fetch the Base64 image using the full URL
+
     UserService.getImageForRecipe(linkToImage)
       .then((response) => {
-        setImageSrc(`data:image/png;base64,${response.data}`);  // Set the Base64 image
+        setImageSrc(`data:image/png;base64,${response.data}`);
       })
       .catch((error) => console.error("Error fetching image:", error));
   }, [linkToImage]);
@@ -38,13 +38,13 @@ function AllRecipeList({ recipes }) {
     <>
       {recipes.map((recipe, index) => (
         <RecipeCard 
-          key={index}  // Use a unique key for each recipe
+          key={index}
           name={recipe.name} 
           time={recipe.howLongItTakesToMake} 
           portion={recipe.portions}
-          linkToImage={recipe.linkToImage}  // Pass the image link
+          linkToImage={recipe.linkToImage}
           recipeId={recipe.id}
-          onClick={() => console.log(`Clicked on ${recipe.name}`)} // Example click handler
+          onClick={() => console.log(`Clicked on ${recipe.name}`)}
         />
       ))}
     </>

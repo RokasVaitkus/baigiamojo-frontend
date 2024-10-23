@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";  // To handle redirection
+import { useNavigate } from "react-router-dom";
 import AdminService from "../services/admin.service";
 
 function NewRecipe() {
@@ -10,14 +10,14 @@ function NewRecipe() {
   const [howToMakeIt, setHowToMakeIt] = useState("");
   const [ingredients, setIngredients] = useState([{ name: "", weight: 0 }]);
 
-  const navigate = useNavigate();  // To navigate to the upload page
+  const navigate = useNavigate();
 
-  // Function to handle adding a new ingredient field
+  
   const addIngredient = () => {
     setIngredients([...ingredients, { name: "", weight: 0 }]);
   };
 
-  // Function to handle ingredient input changes
+
   const handleIngredientChange = (index, field, value) => {
     const updatedIngredients = [...ingredients];
     updatedIngredients[index][field] = value;
@@ -36,11 +36,9 @@ function NewRecipe() {
     };
 
     try {
-      // Call service to create the recipe and get the created recipe's ID
       const response = await AdminService.createRecipe(newRecipe);
-      const recipeId = response.id;  // Assuming the response contains the new recipe ID
+      const recipeId = response.id;
 
-      // Redirect to the upload image page, passing the recipeId
       navigate(`/upload-image/${recipeId}`);
     } catch (error) {
       console.error("Error creating recipe:", error);
@@ -102,7 +100,7 @@ function NewRecipe() {
           />
         </div>
 
-        {/* Ingredients section */}
+
         <h3>Ingredients</h3>
         {ingredients.map((ingredient, index) => (
           <div key={index} className="ingredient-group">

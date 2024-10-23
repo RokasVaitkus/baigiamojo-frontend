@@ -46,8 +46,8 @@ const editRecipeById = (id,recipeUpdates) => {
 const editRecipeImageLink = (id, link) => {
   return axios.patch(API_URL + "updaterecipeimagelink/" + id, link, {
       headers: {
-          ...authHeader(), // Keep existing auth headers
-          'Content-Type': 'text/plain' // Specify that the content is plain text
+          ...authHeader(),
+          'Content-Type': 'text/plain'
       }
   });
 }

@@ -1,70 +1,95 @@
-# Getting Started with Create React App
+The Recipe Book
+The Recipe Book is a web application that allows users to explore and manage recipes. It provides different levels of access based on user roles, such as basic user and admin, with features like viewing, creating, and managing recipes. The project utilizes a React.js frontend, a Spring Boot backend, and a MySQL database.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Features
+Unauthenticated Users:
 
-## Available Scripts
+Sign up and sign in to the platform.
+Authenticated Users:
 
-In the project directory, you can run:
+View all recipes.
+View a recipe by its ID.
+Edit user information.
+View recipe images.
+Admin Users:
 
-### `npm start`
+Manage users (view, delete, find by ID).
+Create, edit, and delete recipes.
+Manage recipe images (create, update, delete).
+Technologies Used
+Frontend:
+React.js: For building the user interface.
+Backend:
+Spring Boot: For handling RESTful API requests.
+Database:
+MySQL: For storing user and recipe data.
+Endpoints
+Public Endpoints:
+POST /signin: Sign in to the platform.
+POST /signup: Sign up for an account.
+User Endpoints (After Logging In):
+PATCH /edituserbyid/{id}: Edit user information.
+GET /allrecipes: View all available recipes.
+GET /findrecipebyid/{id}: View a specific recipe by ID.
+GET /findimagebyid/{id}: View an image by its ID.
+Admin Endpoints (After Logging In as Admin):
+GET /allusers: View all users.
+DELETE /deleteuserbyid/{id}: Delete a user by ID.
+GET /finduserbyid/{id}: Find a user by ID.
+POST /createrecipe: Create a new recipe.
+DELETE /deleterecipebyid/{id}: Delete a recipe by ID.
+PATCH /editrecipebyid/{id}: Edit a recipe by ID.
+PATCH /updaterecipeimagelink/{id}: Update recipe image link by ID.
+POST /createimage: Create a new image.
+DELETE /deleteimagebyid/{id}: Delete an image by ID.
+PATCH /editimagebyid/{id}: Edit an image by ID.
+Git Repositories
+Backend: baigiamojo-backend
+Frontend: baigiamojo-frontend
+Installation and Setup
+Backend Setup
+Clone the repository:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+bash
+Copy code
+git clone https://github.com/RokasVaitkus/baigiamojo-backend.git
+cd baigiamojo-backend
+Set up the MySQL database:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+sql
+Copy code
+CREATE DATABASE recipe_book;
+Configure MySQL connection in the application.properties file:
 
-### `npm test`
+properties
+Copy code
+spring.datasource.url=jdbc:mysql://localhost:3306/recipe_book
+spring.datasource.username=your-username
+spring.datasource.password=your-password
+spring.jpa.hibernate.ddl-auto=update
+Run the Spring Boot backend:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+bash
+Copy code
+./mvnw spring-boot:run
+Frontend Setup
+Clone the frontend repository:
 
-### `npm run build`
+bash
+Copy code
+git clone https://github.com/RokasVaitkus/baigiamojo-frontend.git
+cd baigiamojo-frontend
+Install dependencies:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+bash
+Copy code
+npm install
+Start the React app:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+bash
+Copy code
+npm start
+API Endpoints Overview
+Public: POST /signin, POST /signup
+User: PATCH /edituserbyid/{id}, GET /allrecipes, GET /findrecipebyid/{id}, GET /findimagebyid/{id}
+Admin: Full user and recipe management including creating, editing, and deleting.
