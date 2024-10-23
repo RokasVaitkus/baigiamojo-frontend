@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
-import AuthService from "../services/auth.service";
-import AllRecipeList from "../AllRecipeList";
-import RecipeService from "../services/recipe.service";
+import LoginService from "../services/login.service";
+import AllRecipeList from "./AllRecipeList";
+import UserService from "../services/user.service";
+import RecipeSlideshow from "./RecipeSlideShow";
+
 
 const Home = () => {
   const [content, setContent] = useState("Welcome to the homepage!");
-  const [error, setError] = useState(null);    // State to handle any potential errors
+  const [error, setError] = useState(null);    // State to handle any potential errors 
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
-    RecipeService.getAllRecipes()
+    UserService.getAllRecipes()
       .then(
         (response) => {
           setRecipes(response.data);  // Assuming response.data contains the recipes array
@@ -23,7 +25,7 @@ const Home = () => {
 
 
   useEffect(() => {
-    const user = AuthService.getCurrentUser();
+    const user = LoginService.getCurrentUser();
     if (user) {
       setContent(`Welcome back, ${user.username}!`);
     }
@@ -32,8 +34,9 @@ const Home = () => {
   return (
     <div className="outer-container">
 
-      <h1 className="title">RECEPTU SKRYNIA</h1>
+      <h1 className="title">The Recipe Book</h1>
     <div className="content-container">
+      <RecipeSlideshow />
       <div className="grid">
         <AllRecipeList recipes={recipes}/>
       </div>

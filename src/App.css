@@ -4,6 +4,67 @@
   padding: 0;
   box-sizing: border-box;
 }
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.7); /* Slightly transparent white */
+  border: none;
+  font-size: 24px;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 10; /* Make sure arrows are above other elements */
+}
+
+.left-arrow {
+  left: 10px; /* Position to the left */
+}
+
+.right-arrow {
+  right: 10px; /* Position to the right */
+}
+
+.recipe-slideshow {
+  position: relative;
+  width: 100%; /* or a specific width */
+  overflow: hidden;
+}
+
+.slideshow-container {
+  display: flex;
+  transition: transform 0.5s ease-in-out; /* Smooth transition between slides */
+  width: 100%; /* or a specific width */
+}
+
+.slide {
+  min-width: 100%;
+  background-color: #fff; /* Give it a white background for visibility */
+  /* opacity: 0; */
+}
+
+.slide.active {
+  opacity: 1; /* Show active slide */
+}
+
+
+.slideshow-indicators {
+  text-align: center;
+  padding: 10px 0;
+}
+
+.indicator {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin: 0 5px;
+  border-radius: 50%;
+  background-color: #ccc;
+  cursor: pointer;
+}
+
+.indicator.active {
+  background-color: #30b22a; /* Active indicator color */
+}
 
 /* Set the whole background to grey */
 body {
@@ -46,7 +107,15 @@ body {
   align-items: center;
   margin-bottom: 30px; /* Space between search/filter area and grid */
 }
-
+.single-recipe-card{
+  background-color: white; /* White content area */
+  border-color: #30b22a;
+  padding: 40px;
+  border-radius: 15px; /* Slight rounding for modern look */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Optional shadow for subtle depth */
+  width: 100%;
+  max-width: 1200px;
+}
 .search-bar {
   width: 60%;
   padding: 10px;
@@ -58,6 +127,97 @@ body {
   display: flex;
   gap: 10px; /* Space between filter buttons */
 }
+/* Scrollable container for the list of recipes */
+.scrollable-recipes-container {
+  max-height: 400px; /* Set the height limit for the scroll area */
+  overflow-y: auto;  /* Enable vertical scroll when content exceeds height */
+  background-color: white; /* White background for the box */
+  padding: 20px; /* Add padding inside the box */
+  border: 2px solid #30b22a; /* Green border to match the theme */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  width: 100%; /* Full width */
+  margin-top: 20px; /* Space from the title or other content */
+}
+
+/* Style for individual recipe items inside the scrollable box */
+.recipe-item {
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc; /* Separator between recipes */
+}
+
+.recipe-item h3 {
+  font-size: 18px;
+  color: #30b22a; /* Green title color for recipes */
+}
+
+.recipe-item p {
+  color: #555; /* Darker color for the description */
+}
+
+.recipe-item button {
+  background-color: #30b22a;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px; /* Space between buttons */
+}
+
+.recipe-item button:hover {
+  background-color: #26911f; /* Slightly darker green on hover */
+}
+/* Styles for the filters (if you have any filter buttons) */
+.filters {
+  display: flex;
+  gap: 10px; /* Space between filter buttons */
+}
+
+/* Scrollable container for the list of users */
+.scrollable-users-container {
+  max-height: 400px; /* Set the height limit for the scroll area */
+  overflow-y: auto;  /* Enable vertical scroll when content exceeds height */
+  background-color: white; /* White background for the box */
+  padding: 20px; /* Add padding inside the box */
+  border: 2px solid #30b22a; /* Green border to match the theme */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  width: 100%; /* Full width */
+  margin-top: 20px; /* Space from the title or other content */
+}
+
+/* Style for individual user items inside the scrollable box */
+.user-item {
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc; /* Separator between users */
+}
+
+.user-item h3 {
+  font-size: 18px;
+  color: #30b22a; /* Green title color for users */
+}
+
+.user-item p {
+  color: #555; /* Darker color for the email */
+}
+
+.user-item button {
+  background-color: #30b22a;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px; /* Space between buttons */
+}
+
+.user-item button:hover {
+  background-color: #26911f; /* Slightly darker green on hover */
+}
+
 
 .filter-button {
   background-color: #30b22a;
@@ -115,6 +275,8 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover; /* Makes sure the image covers the area properly */
+  border-top-left-radius: 15px; /* Adjust the value to your preferred roundness */
+  border-top-right-radius: 15px;
 }
 
 /* Recipe card content styling */
@@ -127,6 +289,7 @@ body {
   text-align: left;
 }
 
+
 .recipe-card p {
   font-size: 14px;
   margin: 5px 0;
@@ -135,6 +298,107 @@ body {
 .recipe-card strong {
   font-weight: bold;
 }
+/* Centering the login form and making it smaller */
+.login-container {
+  max-width: 400px; /* Set the width of the login form */
+  margin: 50px auto; /* Center the form horizontally */
+  padding: 20px; /* Add some padding */
+  background-color: #ccc;
+  border: 1px solid #ccc; /* Optional border */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+.admin-container {
+  max-width: 1200px; /* Set the width of the login form */
+  margin: 50px auto; /* Center the form horizontally */
+  padding: 30px; /* Add some padding */
+  background-color: #ccc;
+  border: 1px solid #ccc; /* Optional border */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+.button-container {
+  display: flex;
+  justify-content: flex-end; /* Aligns the button to the right */
+  margin-top: 20px; /* Optional: Adds some space above the button */
+}
+.btn {
+  background-color: #30b22a; /* Set background color to green */
+  color: white;           /* Set text color to white */
+  border: none;           /* Remove border */
+  padding: 10px 20px;     /* Add some padding */
+  font-size: 16px;        /* Set font size */
+  cursor: pointer;        /* Change cursor to pointer on hover */
+  border-radius: 5px;    /* Add rounded corners */
+  transition: background-color 0.3s; /* Smooth transition */
+}
+
+/* Make input fields the same size */
+.login-container .form-control {
+  width: 100%; /* Make username and password fields take full width */
+  height: 45px; /* Ensure consistent height */
+  margin-bottom: 15px; /* Add space between input fields */
+}
+
+/* Adjust button style */
+.login-container .btn-block {
+  width: 100%; /* Make the login button full width */
+  background-color: #30b22a;
+}
+/**/
+.recipe-slideshow {
+  position: relative;
+  width: 100%; /* Full width */
+  overflow: hidden; /* Hide overflow for the sliding effect */
+}
+
+.slideshow-container {
+  display: flex; /* Use flexbox for horizontal sliding */
+  transition: transform 0.5s ease-in-out; /* Smooth transition */
+  width: 100%; /* Ensure full width */
+}
+
+.slide {
+  min-width: 100%; /* Each slide takes full width of the container */
+  display: flex; /* Flex for alignment */
+  justify-content: center; /* Center content */
+  align-items: center; /* Center content vertically */
+  background-color: #fff; /* Background color for visibility */
+}
+
+/* Recipe Card Styling */
+.recipe-card {
+  border: 5px solid #30b22a; /* Green border */
+  border-radius: 20px; /* Rounded corners */
+  display: flex; /* Flex for inner content */
+  flex-direction: column; /* Arrange content vertically */
+  justify-content: flex-end; /* Align content at the bottom */
+  width: 100%; /* Full width */
+  height: 100%; /* Full height to fill the slide */
+  background-color: white; /* White background for the card */
+  padding: 0; /* Remove padding for full size */
+}
+
+/* Recipe Image Styling */
+.recipe-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Makes sure the image covers the area properly */
+  border-top-left-radius: 15px; /* Adjust the value to your preferred roundness */
+  border-top-right-radius: 15px;
+}
+
+/* Content area for recipe card */
+.recipe-card .content {
+  background-color: #555; /* Dark background for text area */
+  color: white;
+  padding: 10px; /* Padding inside the content area */
+  width: 100%; /* Full width */
+  border-radius: 0 0 15px 15px; /* Round bottom corners */
+  text-align: left; /* Align text to the left */
+}
+
+
 
 /* Responsive design for smaller screens */
 @media (max-width: 768px) {

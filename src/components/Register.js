@@ -4,7 +4,8 @@ import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
 
-import AuthService from "../services/auth.service";
+
+import LoginService from "../services/login.service";
 
 const required = (value) => {
     if (!value) {
@@ -83,7 +84,7 @@ const Register = () => {
         form.current.validateAll();
     
         if (checkBtn.current.context._errors.length === 0) {
-          AuthService.register(username, email, password).then(
+          LoginService.register(username, email, password).then(
             (response) => {
               setMessage(response.data.message);
               setSuccessful(true);
@@ -105,12 +106,8 @@ const Register = () => {
 
     return (
         <div className="col-md-12">
-          <div className="card card-container">
-            <img
-              src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-              alt="profile-img"
-              className="profile-img-card"
-            />
+          <div className="login-container">
+
     
             <Form onSubmit={handleRegister} ref={form}>
               {!successful && (

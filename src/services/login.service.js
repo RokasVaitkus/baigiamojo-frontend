@@ -1,5 +1,4 @@
 import axios from "axios";
-import authHeader from "./auth-header";
 
 const API_URL = "http://localhost:8080/api/auth/";
 
@@ -27,23 +26,7 @@ const register = (username, email, password) => {
         return response.data;
       });
   };
-
-  const getAllUsers = () => {
-    return axios.get(API_URL + "allusers", { headers: authHeader() });
-  };
-
-  const getUserById = (id) => {
-    return axios.get(API_URL + "findById/" + id, { headers: authHeader() });
-  };
-
-  const editUserById =(id) =>{
-    return axios.patch(API_URL + "editById/" + id, {headers: authHeader()});
-  };
-
-  const deleteUserById =(id) =>{
-    return axios.delete(API_URL+ "deleteById/" + id , {headers: authHeader()});
-  };
-
+  
   const logout = () => {
     localStorage.removeItem("user");
   };
@@ -52,15 +35,12 @@ const register = (username, email, password) => {
     return JSON.parse(localStorage.getItem("user"));
   };
 
-  const AuthService = {
+  const LoginService = {
     register,
     login,
-    getAllUsers,
-    getUserById,
-    editUserById,
-    deleteUserById,
     logout,
     getCurrentUser,
   };
 
-  export default AuthService;
+  export default LoginService;
+  
